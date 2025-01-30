@@ -4,7 +4,6 @@ resource "aws_security_group" "ec2-accenture-security-group" {
     vpc_id = var.vpc_id
 }
 
-
 resource "aws_vpc_security_group_ingress_rule" "ec2-accenture-ingress-dynamic" {
   for_each = { for idx, rule in var.ingress_rules : idx => rule }
 
