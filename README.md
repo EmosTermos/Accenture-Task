@@ -2,7 +2,7 @@
 
 ## Adrress to nginx server: 
 
-` http://ec2-3-73-74-203.eu-central-1.compute.amazonaws.com/http://ec2-3-73-74-203.eu-central-1.compute.amazonaws.com/` 
+[Visit nginx server](http://ec2-3-73-74-203.eu-central-1.compute.amazonaws.com/) 
 
 ## Terraform
 1) Bootstrap contains a code to deploy infrastructure responsible for storing state of an task architecture
