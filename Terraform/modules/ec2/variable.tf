@@ -34,3 +34,8 @@ variable "security_group_id" {
   description = "Security Group ID"
   type = string
 }
+
+variable "user_data" {
+  description = "Scripts"
+  type = string
+}

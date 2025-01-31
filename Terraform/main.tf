@@ -52,6 +52,8 @@ module "ec2_accenture1" {
   subnet_id         = element(data.aws_subnets.default.ids, 0)
   key_name          = var.key_name
   security_group_id = module.ec2_accenture_sg_app.sg_id
+
+  user_data = file("../Script/install_app.sh")
 }
 
 module "ec2_accenture2" {
@@ -61,6 +63,8 @@ module "ec2_accenture2" {
   subnet_id         = element(data.aws_subnets.default.ids, 0)
   key_name          = var.key_name
   security_group_id = module.ec2_accenture_sg_app.sg_id
+
+  user_data = file("../Script/install_app.sh")
 }
 
 module "ec2_accenture-proxy" {
@@ -70,4 +74,9 @@ module "ec2_accenture-proxy" {
   subnet_id         = element(data.aws_subnets.default.ids, 0)
   key_name          = var.key_name
   security_group_id = module.ec2_accenture_sg_proxy.sg_id
+
+  user_data = templatefile("../Script/install_nginx.sh", {
+    vm1_private_ip = module.ec2_accenture1.private_ip
+    vm2_private_ip = module.ec2_accenture2.private_ip
+  })
 }
