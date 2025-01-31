@@ -1,0 +1,5 @@
+- name: Install and Configure CloudWatch Agent for Nginx Logs
+  hosts: ec2-accenture
+  become: yes
+  roles:
+    - cloudwatch

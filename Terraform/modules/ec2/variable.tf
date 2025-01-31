@@ -36,6 +36,11 @@ variable "security_group_id" {
 }
 
 variable "user_data" {
-  description = "Scripts"
+  description = "Scripts path"
   type        = string
+}
+
+variable "ec2_profile_name" {
+  description = "Profile name for instance"
+  type = string
 }

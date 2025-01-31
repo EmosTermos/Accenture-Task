@@ -1,0 +1,39 @@
+- name: Download Amazon CloudWatch Agent
+  get_url:
+    url: "https://amazoncloudwatch-agent.s3.amazonaws.com/debian/amd64/latest/amazon-cloudwatch-agent.deb"
+    dest: "/tmp/amazon-cloudwatch-agent.deb"
+
+- name: Install Amazon CloudWatch Agent
+  apt: 
+    deb: "/tmp/amazon-cloudwatch-agent.deb"
+    state: present
+
+- name: Ensure Amazon CloudWatch Agent Service is stopped before config update
+  systemd:
+    name: amazon-cloudwatch-agent
+    state: stopped
+  ignore_errors: yes
+
+- name: Deploy CloudWatch Agent Configuration
+  template: 
+    src: cloudwatch-config.json.j2
+    dest: /opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json
+    owner:  root
+    group: root
+    mode: '0644'
+
+- name: Enable and Start Amazon CloudWatch Agent
+  systemd:
+    name: amazon-cloudwatch-agent
+    enabled: yes
+    state: started
+
+- name: Verify CloudWatch Agent Status
+  shell: systemctl status amazon-cloudwatch-agent | grep "active (running)"
+  register: cloudwatch_status
+  changed_when: false
+
+- name: Show CloudWatch Agent Status
+  debug:
+    msg: "CloudWatch Agent is running successfully!"
+  when: cloudwatch_status.rc == 0

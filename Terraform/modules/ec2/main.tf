@@ -5,7 +5,7 @@ resource "aws_instance" "ec2-accenture" {
   vpc_security_group_ids = [var.security_group_id]
 
   user_data = var.user_data
-
+  iam_instance_profile = var.ec2_profile_name
   key_name = var.key_name
 
   tags = {
