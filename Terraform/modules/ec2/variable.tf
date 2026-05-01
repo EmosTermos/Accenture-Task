@@ -43,4 +43,4 @@ variable "user_data" {
 variable "ec2_profile_name" {
   description = "Profile name for instance"
   type = string
-}
+ }

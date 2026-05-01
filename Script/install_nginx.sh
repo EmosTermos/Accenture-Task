@@ -13,9 +13,9 @@ upstream vm_servers {
 server {
     listen 80;
 
-    location / {
+    location = / {
         if ($query_string != "") {
-		return 403;
+		    return 403;
     	}
 
         proxy_pass http://vm_servers;
