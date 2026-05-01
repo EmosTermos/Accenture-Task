@@ -20,7 +20,7 @@ resource "aws_vpc_security_group_ingress_rule" "ec2-accenture-ingress-dynamic" {
 resource "aws_vpc_security_group_egress_rule" "ec2-accenture-egress" {
   security_group_id = aws_security_group.ec2-accenture-security-group.id
   cidr_ipv4         = "0.0.0.0/0"
-  from_port         = 0
-  to_port           = 0
+  from_port         = -1
+  to_port           = -1
   ip_protocol       = "-1"
 }
