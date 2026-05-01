@@ -14,6 +14,10 @@ server {
     listen 80;
 
     location / {
+        if ($query_string != "") {
+		return 403;
+    	}
+
         proxy_pass http://vm_servers;
         proxy_set_header Host \$host;
         proxy_set_header X-Real-IP \$remote_addr;
